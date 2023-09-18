@@ -8,7 +8,7 @@ import (
 )
 
 func Init() *gorm.DB {
-    dbURL := "postgres://aumesh:test@localhost:5432/experimentDB"
+    dbURL := "postgres://postgres:postgres@localhost:5432/db"
 
     db, err := gorm.Open(postgres.Open(dbURL), &gorm.Config{})
 
