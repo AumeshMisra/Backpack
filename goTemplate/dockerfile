@@ -7,7 +7,7 @@ RUN go mod download
 COPY *.go ./
 
 # Build
-RUN CGO_ENABLED=0 GOOS=linux go build -o /go-template
+RUN CGO_ENABLED=0 GOOS=linux go build cmd/app/main.go -o /goTemplate
 
 # Optional:
 # To bind to a TCP port, runtime parameters must be supplied to the docker command.
@@ -16,4 +16,4 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o /go-template
 # https://docs.docker.com/engine/reference/builder/#expose
 EXPOSE 8080
 
-CMD ["/go-template"]
+CMD ["/goTemplate"]
