@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
- DB := db.Init()
- log.Println(DB)
+	DB := db.Init()
+	log.Println(DB)
 }

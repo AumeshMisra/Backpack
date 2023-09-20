@@ -5,13 +5,15 @@ services:
     build:
       dockerfile: dockerfile
     expose:
-      - "8080"
+      - "8000"
     ports:
-      - "8080:8080"
+      - "8000:8000"
     volumes:
       - ./:/app
     depends_on:
       - db
+    environment:
+      - DB_HOST=docker
 
   db:
     image: postgres:16.0
