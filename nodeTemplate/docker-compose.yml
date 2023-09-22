@@ -1,0 +1,30 @@
+services:
+  db:
+    container_name: postgres
+    image: postgres
+    ports:
+      - '${DB_PORT}:${DB_PORT}'
+    volumes:
+      - data:/data/db
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+  node-express-docker:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: node-express-docker
+    image: node-express-docker
+    depends_on:
+      - db
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./:/usr/app
+    expose:
+      - "8080"
+    ports:
+      - "8080:8080"
+volumes: 
+ data: {}

@@ -1,0 +1,1 @@
+# The library folder holds the constants and core libraries (esp with 3rd party applications). This could also include holding repos to acccess data from database.

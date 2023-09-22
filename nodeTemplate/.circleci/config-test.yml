@@ -1,0 +1,39 @@
+# This config is equivalent to both the '.circleci/extended/orb-free.yml' and the base '.circleci/config.yml'
+version: 2.1
+
+# Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.
+# See: https://circleci.com/docs/2.0/orb-intro/
+orbs:
+  node: circleci/node@5.1.0
+  aws-ecs: circleci/aws-ecs@3.2.0
+  aws-ecr: circleci/aws-ecr@8.2.1
+  aws-cli: circleci/aws-cli@3.1.4
+
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+workflows:
+  sample: # This is the name of the workflow, feel free to change it to better match your workflow.
+    # Inside the workflow, you define the jobs you want to run.
+    jobs:
+      - node/test:
+          name: unit-test
+          version: '18.12.1'
+          pkg-manager: yarn
+      - aws-ecr/build-and-push-image:
+          name: deploy-to-ecr
+          requires:
+            - unit-test
+          dockerfile: Dockerfile.prod
+          no-output-timeout: 20m
+          repo: backend_template
+      - aws-ecs/deploy-service-update:
+          requires:
+            - deploy-to-ecr
+          cluster: '${ECS_CLUSTER_NAME}'
+          family: '${ECS_TASK_FAMILY_NAME}'
+          service-name: '${ECS_SERVICE_NAME}'
+          force-new-deployment: true
+          verify-revision-is-deployed: true
+          skip-task-definition-registration: true
+          verification-timeout: 10m
+          docker-image-for-job: 'cimg/node:18.12.1'
