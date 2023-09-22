@@ -2,7 +2,7 @@
   "compilerOptions": {
     "module": "NodeNext",
     "moduleResolution": "nodenext",
-    "target": "ES2022",
+    "target": "es2022",
     "allowJs": true,
     "sourceMap": true,
     "importHelpers": true,
