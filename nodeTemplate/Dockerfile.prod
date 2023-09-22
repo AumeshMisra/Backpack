@@ -13,6 +13,8 @@ COPY ./src ./src
 
 # Installs all packages
 RUN yarn install --pure-lockfile && yarn cache clean
+
+# Runs the dev npm script to build & start the server
 EXPOSE 8080
 RUN yarn run build
 CMD ["yarn", "start"]
