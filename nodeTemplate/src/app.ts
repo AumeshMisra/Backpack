@@ -1,7 +1,6 @@
-import "module-alias/register";
 import express from "express";
-import UserRoutes from "@routes/user";
-import sequelize from "./models";
+import UserRoutes from "@routes/user.ts";
+import sequelize from "./models/index.ts";
 
 const app = express();
 
