@@ -20,4 +20,5 @@ var CreateCmd = &cobra.Command{
 
 func init() {
 	CreateCmd.AddCommand(goCmd)
+	CreateCmd.AddCommand(nodeCmd)
 }
