@@ -11,9 +11,6 @@
     "ts-node-dev": "node --loader ts-node/esm -r tsconfig-paths/register",
     "test": "echo 'Tests working'"
   },
-  "prisma": {
-    "schema": "src/models/schema.prisma"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
